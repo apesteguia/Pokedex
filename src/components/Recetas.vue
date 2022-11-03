@@ -5,6 +5,7 @@ export default {
         return {
             nombreid: [],
             foto: [],
+            x: "",
             infotipo: [],
             pokemon: "",
             visible: false
@@ -21,9 +22,11 @@ export default {
                 .then((data) => {
                     this.nombreid.push(data.name, data.id),
                         this.infotipo = data["types"],
-                        this.foto = data["sprites"]
+                        this.foto = data["sprites"],
+                        this.x = this.foto.front_default
                 });
             this.visible = true;
+            console.log(this.foto.length)
         },
     }
 }
@@ -43,9 +46,8 @@ export default {
                 <p v-if="visible">{{ infotipo[0].type.name }}</p>
                 <p v-if="visible, infotipo.length > 1">{{ infotipo[1].type.name }}</p>
             </div>
-            <div class="tipos"><img src={{foto[0]}} alt=""></div>
-            <p>{{ foto["front-default"] }}</p>
-        </div>1
+            <div class="tipos"><img v-if="visible, x !== ''" :src="x"></div>
+        </div>
     </div>
 </template>
 
