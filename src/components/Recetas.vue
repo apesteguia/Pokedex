@@ -6,6 +6,7 @@ export default {
             nombreid: [],
             foto: [],
             x: "",
+            rgb: "",
             infotipo: [],
             pokemon: "",
             visible: false
@@ -27,7 +28,65 @@ export default {
                 });
             this.visible = true;
             console.log(this.foto.length)
+            this.color()
         },
+        color() {
+            let a = (this.infotipo[0].type.name).toString();
+            if (a === 'grass') {
+                this.rgb = 'green'
+            }
+            else if (a === 'fire') {
+                this.rgb = '#e62d20'
+            }
+            else if (a === 'ground') {
+                this.rgb = '#804f2a'
+            }
+            else if (a === 'water') {
+                this.rgb = '#1a74db'
+            }
+            else if (a === 'ice') {
+                this.rgb = '#8fc7c6'
+            }
+            else if (a === 'electric') {
+                this.rgb = '#e4f261'
+            }
+            else if (a === 'ghost') {
+                this.rgb = '#191521'
+            }
+            else if (a === 'poison') {
+                this.rgb = '#5006c7'
+            }
+            else if (a === 'steel') {
+                this.rgb = '#4a4a4a'
+            }
+            else if (a === 'rock') {
+                this.rgb = '#9e843a'
+            }
+            else if (a === 'flying') {
+                this.rgb = '#9ddbe0'
+            }
+            else if (a === 'dark') {
+                this.rgb = '#1c1c1f'
+            }
+            else if (a === 'fighting') {
+                this.rgb = '#9c2d17'
+            }
+            else if (a === 'psychic') {
+                this.rgb = '#b611c2'
+            }
+            else if (a === 'fairy') {
+                this.rgb = '#d059d9'
+            }
+            else if (a === 'dragon') {
+                this.rgb = '#080854'
+            }
+            else if (a === 'bug') {
+                this.rgb = '#6db536'
+            }
+            else if (a === 'normal') {
+                this.rgb = '#a6a6a6'
+            }
+        }
     }
 }
 </script>
@@ -36,11 +95,11 @@ export default {
 <template>
     <div class="app">
         <div class="dos">
-            <input type="text" placeholder="introuce el nombre/id de un pokemon" id="pokemon">
+            <input type="text" placeholder="introuce el nombre/id de un pokemon" id="pokemon" autocomplete="off">
             <button @click="buscarNombreId()">Search</button>
         </div>
         <div class="pokemon" v-if="visible">
-            <div class="nombre">{{ nombreid[0] }} #{{ nombreid[1] }}</div>
+            <div class="nombre" :style="{ backgroundColor: rgb }">{{ nombreid[0] }} #{{ nombreid[1] }}</div>
             <h1>Types</h1>
             <div class="tipos">
                 <p v-if="visible">{{ infotipo[0].type.name }}</p>
@@ -54,8 +113,8 @@ export default {
 
 <style scoped>
 img {
-    width: 100px;
-    height: 100px;
+    width: 150px;
+    height: 150px;
 }
 
 .tipos {
@@ -108,7 +167,6 @@ button {
     flex-direction: row;
     color: var(--color);
     text-transform: capitalize;
-    background-color: var(--enfasis);
 }
 
 .dos {
